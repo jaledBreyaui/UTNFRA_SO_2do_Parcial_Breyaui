@@ -1,0 +1,15 @@
+---
+# tasks file for instala_tools_Breyaui
+#
+- name: "Instalaciones"
+   become: yes
+   ansible.builtin.package:
+     name: "{{ item }}"
+     state: present
+   loop:
+     - htop
+     - net-tools
+     - tmux
+     - tree
+     - speedtest-cli
+   register: install_result

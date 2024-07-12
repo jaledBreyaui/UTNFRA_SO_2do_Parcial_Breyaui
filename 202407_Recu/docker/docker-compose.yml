@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+    web:
+        image: jaledbreyaui/web_parcial 
+        ports:
+          - 8081:80
+        volumes:
+          - ./web/file/info.txt:/usr/share/nginx/html/file/ 

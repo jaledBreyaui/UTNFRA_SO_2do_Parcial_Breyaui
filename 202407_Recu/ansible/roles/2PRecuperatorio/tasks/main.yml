@@ -1,0 +1,34 @@
+---
+# tasks file for 2PRecuperatorio
+
+ - name: "Rol: 2PRecuperatorio"
+   debug:
+     msg: "Inicio de tareas dentro del Rol: 2PRecuperatorio"
+
+ 
+ - name: chequear si existe el directorio /tmp/alumno
+   ansible.builtin.stat:
+    path: /tmp/alumno
+   register: dir_exists
+
+ - name: Crear el directorio si no existe
+   ansible.builtin.file:
+     path: /tmp/alumno
+     state: directory
+   when: not dir_exists.stat.exists
+
+ - name: Crear el archivo datos.txt en /tmp/alumno
+   ansible.builtin.copy:
+    content: |
+      Nombre: Jaled
+      Apellido: Breyaui
+      División: 311
+      Fecha: "{{ ansible_date_time.date }}"
+      ---
+      Distribución: {{ ansible_distribution }}
+      Cantidad de Cores: {{ ansible_processor_cores }}
+    dest: /tmp/alumno/datos.txt
+
+ - name: Mensaje final
+   debug:
+      msg: "Fin"
